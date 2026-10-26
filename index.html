@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#101827">
-<title>Meu Assistente — teste de voz</title>
+<title>Layla — sua assistente pessoal</title>
 <style>
 :root{color-scheme:dark;--bg:#0b1220;--panel:#151f31;--line:#2b3a52;--text:#eef4ff;--muted:#aab8ce;--accent:#67e8d1}
 *{box-sizing:border-box}
@@ -16,13 +16,7 @@ h1{font-size:1.45rem;margin:.25rem 0}
 .pill{font-size:.75rem;border:1px solid var(--line);border-radius:999px;padding:7px 10px;color:var(--muted)}
 .panel{background:rgba(21,31,49,.92);border:1px solid var(--line);border-radius:22px;padding:20px;margin:14px 0;box-shadow:0 14px 40px #0002}
 .avatar-wrap{display:flex;justify-content:center;padding:10px 0 18px}
-.avatar{width:150px;height:150px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 50% 35%,#5e9bb7,#223b57 62%,#111d2e);border:2px solid #7ee9d8;box-shadow:0 0 32px #67e8d133;position:relative}
-.face{width:82px;height:100px;background:linear-gradient(145deg,#e8c6a7,#a87561);border-radius:46% 46% 43% 43%;position:relative;box-shadow:inset -8px -3px 0 #704c4b33}
-.hair{position:absolute;top:-7px;left:-2px;width:86px;height:38px;background:#1a202a;border-radius:48% 48% 25% 20%;transform:rotate(-4deg)}
-.eye{position:absolute;top:45px;width:8px;height:5px;background:#222b39;border-radius:50%}
-.eye.left{left:18px}.eye.right{right:18px}
-.nose{position:absolute;top:49px;left:38px;width:8px;height:20px;border-right:2px solid #956c5d;border-bottom:2px solid #956c5d;border-radius:0 0 6px 0}
-.mouth{position:absolute;top:75px;left:30px;width:22px;height:7px;border-bottom:2px solid #70494a;border-radius:50%}
+.avatar{width:190px;height:190px;object-fit:cover;object-position:center 35%;border-radius:50%;border:2px solid #7ee9d8;box-shadow:0 0 32px #67e8d133;position:relative;transition:box-shadow .25s}
 .avatar.speaking{animation:pulse 1s infinite alternate}
 @keyframes pulse{from{box-shadow:0 0 22px #67e8d133}to{box-shadow:0 0 42px #67e8d188}}
 .center{text-align:center}
@@ -41,23 +35,23 @@ footer{font-size:.78rem;color:var(--muted);line-height:1.5;margin:18px 4px}
 </head>
 <body>
 <main>
-<header><div><div class="eyebrow">Projeto pessoal · versão 0.1</div><h1>Meu Assistente</h1></div><div class="pill">Teste local</div></header>
+<header><div><div class="eyebrow">Sua assistente pessoal</div><h1>Layla</h1></div><div class="pill">Versão inicial</div></header>
 <section class="panel">
-  <div class="avatar-wrap"><div class="avatar" id="avatar" aria-label="Avatar de demonstração"><div class="face"><div class="hair"></div><div class="eye left"></div><div class="eye right"></div><div class="nose"></div><div class="mouth"></div></div></div></div>
-  <div class="center"><h2>Olá! Vamos testar minha voz?</h2><p class="muted">Este é um avatar ilustrativo provisório, não um rosto humano realista. A próxima etapa será conectar a inteligência artificial.</p></div>
-  <div class="status" id="status" role="status">Pronto. Toque em “Testar microfone” para começar.</div>
-  <button class="primary" id="listen">🎙️ Testar microfone</button>
-  <button class="secondary" id="speak">🔊 Testar voz do assistente</button>
+  <div class="avatar-wrap"><img class="avatar" id="avatar" src="avatar.png" alt="Retrato da Layla, sua assistente virtual"></div>
+  <div class="center"><h2>Olá! Eu sou a Layla.</h2><p class="muted">Estou pronta para conversar com você. Esta é minha primeira versão; em breve vamos ampliar minhas funções.</p></div>
+  <div class="status" id="status" role="status">Pronta para conversar. Toque em “Testar microfone” para falar comigo.</div>
+  <button class="primary" id="listen">🎙️ Falar com a Layla</button>
+  <button class="secondary" id="speak">🔊 Ouvir a Layla</button>
   <label for="typed">Ou escreva uma frase para o assistente falar</label>
-  <input id="typed" value="Olá! Estou pronto para ajudar você." maxlength="240">
-  <div class="output" id="output" aria-live="polite">As frases reconhecidas aparecerão aqui.</div>
+  <input id="typed" value="Olá! Eu sou a Layla. Como posso ajudar você?" maxlength="240">
+  <div class="output" id="output" aria-live="polite">Quando você falar, suas palavras aparecerão aqui.</div>
 </section>
 <section class="panel">
-<h2>O que este teste verifica</h2>
-<p class="muted">✓ Página abre no Android<br>✓ Permissão de microfone, se o navegador oferecer reconhecimento de fala<br>✓ Reprodução de voz em português<br>✓ Interface inicial com avatar</p>
-<p class="muted"><strong>Importante:</strong> esta página não usa IA, não envia sua fala para uma API própria e não controla dispositivos. O reconhecimento de fala do navegador pode usar um serviço de reconhecimento do próprio navegador/sistema.</p>
+<h2>O que a Layla já consegue fazer</h2>
+<p class="muted">✓ Abrir no Android pelo navegador<br>✓ Reconhecer sua fala, se o navegador oferecer esse recurso<br>✓ Responder usando voz em português<br>✓ Exibir o rosto da Layla</p>
+<p class="muted"><strong>Importante:</strong> por enquanto, a Layla ainda não está conectada a uma IA e não controla dispositivos. O reconhecimento de fala é fornecido pelo navegador/sistema.</p>
 </section>
-<footer>Para melhores resultados, abra no Google Chrome e permita o microfone quando solicitado. Se o reconhecimento não estiver disponível ao abrir o arquivo local, o teste de voz falada ainda pode funcionar. Depois podemos hospedar a página com HTTPS e adicionar um backend seguro.</footer>
+<footer>Abra a Layla pelo endereço HTTPS do GitHub Pages e permita o microfone quando solicitado. A palavra de ativação “Layla” será uma próxima etapa; por enquanto, use o botão para iniciar a escuta.</footer>
 </main>
 <script>
 const statusEl=document.getElementById('status');
@@ -73,21 +67,21 @@ function speak(text){
   utter.onerror=()=>{avatar.classList.remove('speaking');statusEl.textContent='Não foi possível reproduzir a voz neste momento.';};
   window.speechSynthesis.speak(utter);
 }
-document.getElementById('speak').addEventListener('click',()=>speak(document.getElementById('typed').value.trim()||'Olá!'));
+document.getElementById('speak').addEventListener('click',()=>speak(document.getElementById('typed').value.trim()||'Olá! Eu sou a Layla.'));
 document.getElementById('listen').addEventListener('click',()=>{
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
   if(!SR){statusEl.textContent='Reconhecimento de fala não disponível neste navegador/arquivo. Use o botão “Testar voz do assistente” e tentaremos o microfone após publicar a página com HTTPS.';return;}
   try{
     const rec=new SR(); rec.lang='pt-BR'; rec.interimResults=false; rec.maxAlternatives=1;
-    rec.onstart=()=>{statusEl.textContent='Estou ouvindo… diga “Olá, assistente”.';};
+    rec.onstart=()=>{statusEl.textContent='Estou ouvindo… fale comigo.';};
     rec.onresult=(event)=>{
       const phrase=event.results[0][0].transcript;
       output.textContent='Você disse: “'+phrase+'”';
       statusEl.textContent='Reconheci sua fala. Vou responder…';
-      speak('Entendi você dizer: '+phrase+'. Este é o primeiro teste do seu assistente pessoal.');
+      speak('Entendi você dizer: '+phrase+'. Sou a Layla e estou aprendendo a ajudar você.');
     };
     rec.onerror=(event)=>{statusEl.textContent='O reconhecimento falhou: '+event.error+'. Verifique a permissão do microfone ou tente a página hospedada em HTTPS.';};
-    rec.onend=()=>{if(statusEl.textContent==='Estou ouvindo… diga “Olá, assistente”.')statusEl.textContent='Não recebi fala. Toque para tentar novamente.';};
+    rec.onend=()=>{if(statusEl.textContent==='Estou ouvindo… fale comigo.')statusEl.textContent='Não recebi fala. Toque para tentar novamente.';};
     rec.start();
   }catch(e){statusEl.textContent='Não foi possível iniciar o microfone. Tente novamente no Chrome.';}
 });
