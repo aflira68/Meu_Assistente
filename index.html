@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101827">
+<title>Meu Assistente — teste de voz</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1220;--panel:#151f31;--line:#2b3a52;--text:#eef4ff;--muted:#aab8ce;--accent:#67e8d1}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at top,#1c3550 0,#0b1220 55%);font:16px system-ui,-apple-system,Segoe UI,sans-serif;color:var(--text);min-height:100vh;padding:20px 16px 32px}
+main{max-width:560px;margin:0 auto}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:8px 0 22px}
+.eyebrow{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+h1{font-size:1.45rem;margin:.25rem 0}
+.pill{font-size:.75rem;border:1px solid var(--line);border-radius:999px;padding:7px 10px;color:var(--muted)}
+.panel{background:rgba(21,31,49,.92);border:1px solid var(--line);border-radius:22px;padding:20px;margin:14px 0;box-shadow:0 14px 40px #0002}
+.avatar-wrap{display:flex;justify-content:center;padding:10px 0 18px}
+.avatar{width:150px;height:150px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 50% 35%,#5e9bb7,#223b57 62%,#111d2e);border:2px solid #7ee9d8;box-shadow:0 0 32px #67e8d133;position:relative}
+.face{width:82px;height:100px;background:linear-gradient(145deg,#e8c6a7,#a87561);border-radius:46% 46% 43% 43%;position:relative;box-shadow:inset -8px -3px 0 #704c4b33}
+.hair{position:absolute;top:-7px;left:-2px;width:86px;height:38px;background:#1a202a;border-radius:48% 48% 25% 20%;transform:rotate(-4deg)}
+.eye{position:absolute;top:45px;width:8px;height:5px;background:#222b39;border-radius:50%}
+.eye.left{left:18px}.eye.right{right:18px}
+.nose{position:absolute;top:49px;left:38px;width:8px;height:20px;border-right:2px solid #956c5d;border-bottom:2px solid #956c5d;border-radius:0 0 6px 0}
+.mouth{position:absolute;top:75px;left:30px;width:22px;height:7px;border-bottom:2px solid #70494a;border-radius:50%}
+.avatar.speaking{animation:pulse 1s infinite alternate}
+@keyframes pulse{from{box-shadow:0 0 22px #67e8d133}to{box-shadow:0 0 42px #67e8d188}}
+.center{text-align:center}
+h2{font-size:1.05rem;margin:0 0 8px}
+.muted{color:var(--muted);font-size:.9rem;line-height:1.5}
+button{width:100%;border:0;border-radius:14px;padding:14px 16px;font-size:1rem;font-weight:650;cursor:pointer;margin-top:10px}
+.primary{background:var(--accent);color:#09202a}
+.secondary{background:#24344b;color:var(--text);border:1px solid var(--line)}
+button:disabled{opacity:.45;cursor:not-allowed}
+.status{padding:12px;border-radius:12px;background:#0c1626;border:1px solid var(--line);font-size:.9rem;margin:14px 0}
+.output{min-height:54px;line-height:1.5;overflow-wrap:anywhere}
+label{display:block;font-size:.85rem;color:var(--muted);margin-top:14px}
+input{width:100%;padding:12px;border:1px solid var(--line);background:#0c1626;color:var(--text);border-radius:12px;font:inherit;margin-top:6px}
+footer{font-size:.78rem;color:var(--muted);line-height:1.5;margin:18px 4px}
+</style>
+</head>
+<body>
+<main>
+<header><div><div class="eyebrow">Projeto pessoal · versão 0.1</div><h1>Meu Assistente</h1></div><div class="pill">Teste local</div></header>
+<section class="panel">
+  <div class="avatar-wrap"><div class="avatar" id="avatar" aria-label="Avatar de demonstração"><div class="face"><div class="hair"></div><div class="eye left"></div><div class="eye right"></div><div class="nose"></div><div class="mouth"></div></div></div></div>
+  <div class="center"><h2>Olá! Vamos testar minha voz?</h2><p class="muted">Este é um avatar ilustrativo provisório, não um rosto humano realista. A próxima etapa será conectar a inteligência artificial.</p></div>
+  <div class="status" id="status" role="status">Pronto. Toque em “Testar microfone” para começar.</div>
+  <button class="primary" id="listen">🎙️ Testar microfone</button>
+  <button class="secondary" id="speak">🔊 Testar voz do assistente</button>
+  <label for="typed">Ou escreva uma frase para o assistente falar</label>
+  <input id="typed" value="Olá! Estou pronto para ajudar você." maxlength="240">
+  <div class="output" id="output" aria-live="polite">As frases reconhecidas aparecerão aqui.</div>
+</section>
+<section class="panel">
+<h2>O que este teste verifica</h2>
+<p class="muted">✓ Página abre no Android<br>✓ Permissão de microfone, se o navegador oferecer reconhecimento de fala<br>✓ Reprodução de voz em português<br>✓ Interface inicial com avatar</p>
+<p class="muted"><strong>Importante:</strong> esta página não usa IA, não envia sua fala para uma API própria e não controla dispositivos. O reconhecimento de fala do navegador pode usar um serviço de reconhecimento do próprio navegador/sistema.</p>
+</section>
+<footer>Para melhores resultados, abra no Google Chrome e permita o microfone quando solicitado. Se o reconhecimento não estiver disponível ao abrir o arquivo local, o teste de voz falada ainda pode funcionar. Depois podemos hospedar a página com HTTPS e adicionar um backend seguro.</footer>
+</main>
+<script>
+const statusEl=document.getElementById('status');
+const output=document.getElementById('output');
+const avatar=document.getElementById('avatar');
+function speak(text){
+  if(!('speechSynthesis' in window)){statusEl.textContent='Este navegador não oferece síntese de voz. Tente abrir no Chrome.';return;}
+  window.speechSynthesis.cancel();
+  const utter=new SpeechSynthesisUtterance(text);
+  utter.lang='pt-BR'; utter.rate=0.96; utter.pitch=0.98;
+  utter.onstart=()=>{avatar.classList.add('speaking');statusEl.textContent='O assistente está falando…';};
+  utter.onend=()=>{avatar.classList.remove('speaking');statusEl.textContent='Teste de voz concluído.';};
+  utter.onerror=()=>{avatar.classList.remove('speaking');statusEl.textContent='Não foi possível reproduzir a voz neste momento.';};
+  window.speechSynthesis.speak(utter);
+}
+document.getElementById('speak').addEventListener('click',()=>speak(document.getElementById('typed').value.trim()||'Olá!'));
+document.getElementById('listen').addEventListener('click',()=>{
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){statusEl.textContent='Reconhecimento de fala não disponível neste navegador/arquivo. Use o botão “Testar voz do assistente” e tentaremos o microfone após publicar a página com HTTPS.';return;}
+  try{
+    const rec=new SR(); rec.lang='pt-BR'; rec.interimResults=false; rec.maxAlternatives=1;
+    rec.onstart=()=>{statusEl.textContent='Estou ouvindo… diga “Olá, assistente”.';};
+    rec.onresult=(event)=>{
+      const phrase=event.results[0][0].transcript;
+      output.textContent='Você disse: “'+phrase+'”';
+      statusEl.textContent='Reconheci sua fala. Vou responder…';
+      speak('Entendi você dizer: '+phrase+'. Este é o primeiro teste do seu assistente pessoal.');
+    };
+    rec.onerror=(event)=>{statusEl.textContent='O reconhecimento falhou: '+event.error+'. Verifique a permissão do microfone ou tente a página hospedada em HTTPS.';};
+    rec.onend=()=>{if(statusEl.textContent==='Estou ouvindo… diga “Olá, assistente”.')statusEl.textContent='Não recebi fala. Toque para tentar novamente.';};
+    rec.start();
+  }catch(e){statusEl.textContent='Não foi possível iniciar o microfone. Tente novamente no Chrome.';}
+});
+</script>
+</body>
+</html>
