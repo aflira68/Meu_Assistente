@@ -78,7 +78,39 @@ document.getElementById('listen').addEventListener('click',()=>{
       const phrase=event.results[0][0].transcript;
       output.textContent='Você disse: “'+phrase+'”';
       statusEl.textContent='Reconheci sua fala. Vou responder…';
-      speak('Entendi você dizer: '+phrase+'. Sou a Layla e estou aprendendo a ajudar você.');
+      rec.onresult = async (event) => {
+  const phrase = event.results[0][0].transcript;
+
+  output.textContent = "Você: " + phrase;
+  statusEl.textContent = "Layla está pensando...";
+
+  try {
+    const response = await fetch(
+      "https://layla-assistente.aflira68.workers.dev",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ message: phrase })
+      }
+    );
+
+    const data = await response.json();
+
+    if (data.reply) {
+      output.textContent =
+        "Você: " + phrase + "\n\nLayla: " + data.reply;
+
+      speak(data.reply);
+    } else {
+      output.textContent =
+        "Erro: " + (data.error || "Resposta inválida");
+    }
+  } catch (err) {
+    output.textContent = "Erro de conexão com a Layla.";
+  }
+};
     };
     rec.onerror=(event)=>{statusEl.textContent='O reconhecimento falhou: '+event.error+'. Verifique a permissão do microfone ou tente a página hospedada em HTTPS.';};
     rec.onend=()=>{if(statusEl.textContent==='Estou ouvindo… fale comigo.')statusEl.textContent='Não recebi fala. Toque para tentar novamente.';};
