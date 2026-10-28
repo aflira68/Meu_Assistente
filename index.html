@@ -74,11 +74,7 @@ document.getElementById('listen').addEventListener('click',()=>{
   try{
     const rec=new SR(); rec.lang='pt-BR'; rec.interimResults=false; rec.maxAlternatives=1;
     rec.onstart=()=>{statusEl.textContent='Estou ouvindo… fale comigo.';};
-    rec.onresult=(event)=>{
-      const phrase=event.results[0][0].transcript;
-      output.textContent='Você disse: “'+phrase+'”';
-      statusEl.textContent='Reconheci sua fala. Vou responder…';
-      rec.onresult = async (event) => {
+       rec.onresult = async (event) => {
   const phrase = event.results[0][0].transcript;
 
   output.textContent = "Você: " + phrase;
