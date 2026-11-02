@@ -107,7 +107,6 @@ document.getElementById('listen').addEventListener('click',()=>{
     output.textContent = "Erro de conexão com a Layla.";
   }
 };
-    };
     rec.onerror=(event)=>{statusEl.textContent='O reconhecimento falhou: '+event.error+'. Verifique a permissão do microfone ou tente a página hospedada em HTTPS.';};
     rec.onend=()=>{if(statusEl.textContent==='Estou ouvindo… fale comigo.')statusEl.textContent='Não recebi fala. Toque para tentar novamente.';};
     rec.start();
